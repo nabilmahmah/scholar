@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:scholar/constans.dart';
 import 'package:scholar/models/message.dart';
 import 'package:scholar/widgets/buble_widget.dart';
@@ -62,7 +63,7 @@ class ChatView extends StatelessWidget {
                       message.add({
                         "message": value,
                         ktime: DateTime.now(),
-                        "id": email,
+                        kemail: email,
                       });
                       controller.clear();
                       scrollcontroller.animateTo(
@@ -77,6 +78,7 @@ class ChatView extends StatelessWidget {
                           message.add({
                             "message": controller.text,
                             ktime: DateTime.now(),
+                            kemail: email,
                           });
                           controller.clear();
 
@@ -107,7 +109,23 @@ class ChatView extends StatelessWidget {
             ),
           );
         } else
-          return CircularProgressIndicator();
+          return ModalProgressHUD(
+            inAsyncCall: true,
+            child: Scaffold(
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
+                backgroundColor: kPrimaryColor,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(klogo, height: 40),
+                    Text("Chat", style: TextStyle(color: Colors.white)),
+                  ],
+                ),
+              ),
+              body: Center(child: CircularProgressIndicator()),
+            ),
+          );
       },
     );
   }

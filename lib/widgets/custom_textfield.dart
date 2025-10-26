@@ -17,9 +17,19 @@ class customTextFormField extends StatelessWidget {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'this field is required';
+        } else if (value.contains(
+          r'[a-zA-Z0-9._%]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}',
+        )) {
+          return 'this field is email';
+        } else if (value.length < 8) {
+          return 'password must be at least 8 characters';
         }
         return null;
       },
+      // {
+
+      //   return null;
+      // },
       style: TextStyle(color: Colors.white),
       cursorColor: Colors.white,
       onChanged: onChanged,

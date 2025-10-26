@@ -1,3 +1,5 @@
+// import 'package:scholar/constans.dart';
+
 class Message {
   final String message;
   final String id;
@@ -5,6 +7,6 @@ class Message {
   Message({required this.message, required this.id});
 
   factory Message.fromJson(json) {
-    return Message(message: json['message'], id: json['id']);
+    return Message(message: json['message'], id: json['email']);
   }
 }
